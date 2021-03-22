@@ -1,11 +1,12 @@
 import 'dart:math';
 
 void main() {
-  var list = randomArray(10, 100);
-  print('begin list $list');
+  var list = randomArray(10, 1000);
+  print('begin list\t$list');
   // bubble(list);
-  select(list);
-  print('end list $list');
+  // select(list);
+  list = quick(list);
+  print('end list\t$list');
 }
 
 List randomArray(int count, int max) {
@@ -43,4 +44,24 @@ void select(List list) {
     list[i] = list[minIndex];
     list[minIndex] = temp;
   }
+}
+
+/// 快速排序
+List quick(List list) {
+  if (list.length <= 1) {
+    return list;
+  }
+  var midIndex = (list.length / 2).floor();
+  var midValue = list.removeAt(midIndex);
+  var left = [];
+  var right = [];
+  for (var i = 0; i < list.length; i++) {
+    var curValue = list[i];
+    if (curValue < midValue) {
+      left.add(curValue);
+    } else {
+      right.add(curValue);
+    }
+  }
+  return quick(left) + [midValue] + quick(right);
 }
