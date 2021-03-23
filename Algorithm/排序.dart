@@ -7,8 +7,46 @@ void main() {
   // select(list);
   // list = quick(list);
   // insert(list);
-  list = merge(list);
+  // list = merge(list);
+  heap(list);
   print('end list\t$list');
+}
+
+/// 堆排序
+void heap(List list) {
+  var length = list.length;
+  void swap(list, i, j) {
+    var a = list[i];
+    list[i] = list[j];
+    list[j] = a;
+  }
+
+  void buildHeap(list, i) {
+    var left = 2 * i + 1;
+    var right = 2 * i + 2;
+    var max = i;
+    if (left < length && list[left] > list[max]) {
+      max = left;
+    }
+    if (right < length && list[right] > list[max]) {
+      max = right;
+    }
+    if (max != i) {
+      swap(list, i, max);
+      buildHeap(list, max);
+    }
+  }
+
+  //  构建堆
+  for (var i = (length / 2).floor(); i >= 0; i--) {
+    buildHeap(list, i);
+  }
+
+  for (var i = length - 1; i > 0; i--) {
+    swap(list, 0, i);
+    length--;
+    buildHeap(list, 0);
+  }
 }
 
 /// 归并排序
@@ -30,8 +68,7 @@ List _merge(List left, List right) {
       result.add(right.removeAt(0));
     }
   }
-  result += (left.length > 0 ? left : right);
-  return result;
+  return result + (left.length > 0 ? left : right);
 }
 
 List randomArray(int count, int max) {
