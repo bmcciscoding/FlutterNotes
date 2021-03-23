@@ -5,8 +5,33 @@ void main() {
   print('begin list\t$list');
   // bubble(list);
   // select(list);
-  list = quick(list);
+  // list = quick(list);
+  // insert(list);
+  list = merge(list);
   print('end list\t$list');
+}
+
+/// 归并排序
+List merge(List list) {
+  if (list.length <= 1) {
+    return list;
+  }
+
+  var mid = (list.length / 2).floor();
+  return _merge(merge(list.sublist(0, mid)), merge(list.sublist(mid)));
+}
+
+List _merge(List left, List right) {
+  var result = [];
+  while (left.length > 0 && right.length > 0) {
+    if (left[0] < right[0]) {
+      result.add(left.removeAt(0));
+    } else {
+      result.add(right.removeAt(0));
+    }
+  }
+  result += (left.length > 0 ? left : right);
+  return result;
 }
 
 List randomArray(int count, int max) {
@@ -28,6 +53,19 @@ void bubble(List list) {
         list[j + 1] = temp;
       }
     }
+  }
+}
+
+/// 插入排序
+void insert(List list) {
+  for (var i = 1; i < list.length; i++) {
+    var preIndex = i - 1;
+    var curValue = list[i];
+    while (preIndex >= 0 && list[preIndex] > curValue) {
+      list[preIndex + 1] = list[preIndex];
+      preIndex--;
+    }
+    list[preIndex + 1] = curValue;
   }
 }
 
