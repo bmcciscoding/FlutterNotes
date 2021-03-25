@@ -1,6 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'styles.dart';
+
+import 'page/layout_page.dart';
 
 class CupertinoStoreApp extends StatelessWidget {
   @override
@@ -43,18 +45,18 @@ class CellObject {
 
 _getCell(ctx) {
   final titles = [
-    CellObject('UIxxx', '/ui'),
+    CellObject('UI', '/ui'),
     CellObject('Layout', '/layout'),
     CellObject('Redux', '/redux'),
     CellObject('Debug', '/debug'),
     CellObject('Profile', '/profile'),
+    CellObject('2046', '/2046'),
   ];
   List<Widget> list = [];
   for (var i = 0; i < titles.length; i++) {
     final cell = titles[i];
     list.add(GestureDetector(
       onTap: () {
-        print('tap $cell.title');
         Navigator.of(ctx).pushNamed(cell.route);
       },
       child: Container(
@@ -70,25 +72,6 @@ _getCell(ctx) {
     ));
   }
   return list;
-}
-
-class LayoutPage extends StatelessWidget {
-  const LayoutPage({Key key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return CupertinoPageScaffold(
-      navigationBar: CupertinoNavigationBar(
-        middle: const Text('Layout'),
-      ),
-      child: SafeArea(
-        child: Container(
-          color: Colors.lightGreenAccent[700],
-          child: Text('xxx'),
-        ),
-      ),
-    );
-  }
 }
 
 // class CupertinoStoreHomePage extends StatelessWidget {
