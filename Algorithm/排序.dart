@@ -14,7 +14,9 @@ void main() {
 
 /// 堆排序
 void heap(List list) {
+
   var length = list.length;
+  
   void swap(list, i, j) {
     var a = list[i];
     list[i] = list[j];
